@@ -13,3 +13,5 @@ benchmark/benchmark
 benchmark/validate
 grade/benchmark
 .vscode
+sync.sh
+vcl.sh
