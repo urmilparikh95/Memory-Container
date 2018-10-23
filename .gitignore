@@ -15,3 +15,4 @@ grade/benchmark
 .vscode
 sync.sh
 vcl.sh
+.DS_Store
