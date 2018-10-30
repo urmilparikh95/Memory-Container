@@ -44,7 +44,39 @@
 #include <linux/mutex.h>
 #include <linux/sched.h>
 
+struct container_list
+{
+    __u64 cid;
+    struct process_list* process_head;
+    struct object_list* object_head;
+    struct container_list* next;
+};
+
+struct process_list
+{
+    int pid;
+    struct process_list* next;
+};
+
+struct object_list
+{
+    __u64 oid;
+    unsigned long v_addr;
+    struct object_list* next;
+};
+
+struct mutex_list
+{
+    __u64 oid;
+    struct mutex* m;
+    struct mutex_list* next;
+};
+
 extern struct miscdevice memory_container_dev;
+
+struct container_list* start;
+struct mutex container_mutex;
+struct mutex object_mutex;
 
 
 int memory_container_init(void)
@@ -56,6 +88,10 @@ int memory_container_init(void)
         printk(KERN_ERR "Unable to register \"memory_container\" misc device\n");
         return ret;
     }
+
+    mutex_init(&container_mutex);
+    mutex_init(&object_mutex);
+    start = NULL;
 
     printk(KERN_ERR "\"memory_container\" misc device installed\n");
     printk(KERN_ERR "\"memory_container\" version 0.1\n");
