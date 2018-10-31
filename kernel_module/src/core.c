@@ -76,7 +76,7 @@ extern struct miscdevice memory_container_dev;
 
 struct container_list* start;
 struct mutex container_mutex;
-struct mutex object_mutex;
+// struct mutex object_mutex;
 
 
 int memory_container_init(void)
@@ -90,7 +90,7 @@ int memory_container_init(void)
     }
 
     mutex_init(&container_mutex);
-    mutex_init(&object_mutex);
+    // mutex_init(&object_mutex);
     start = NULL;
 
     printk(KERN_ERR "\"memory_container\" misc device installed\n");

@@ -75,7 +75,7 @@ struct mutex_list
 };
 
 extern struct mutex container_mutex;
-extern struct mutex object_mutex;
+// extern struct mutex object_mutex;
 extern struct container_list* start;
 
 
@@ -160,7 +160,7 @@ int memory_container_lock(struct memory_container_cmd __user *user_cmd)
     // }
     // printk(KERN_INFO "pid = %d a = %d..\n", current->pid, a);
     // printk(KERN_INFO "pid = %d exited lock..\n", current->pid);
-    mutex_lock(&object_mutex);
+    // mutex_lock(&object_mutex);
     struct mutex* tm;
     struct memory_container_cmd *kernel_cmd = (struct memory_container_cmd*)kmalloc(sizeof(struct memory_container_cmd), GFP_KERNEL);
     copy_from_user(kernel_cmd, user_cmd, sizeof(*user_cmd));
@@ -230,7 +230,7 @@ int memory_container_lock(struct memory_container_cmd __user *user_cmd)
 
 int memory_container_unlock(struct memory_container_cmd __user *user_cmd)
 {
-    mutex_unlock(&object_mutex);
+    // mutex_unlock(&object_mutex);
     struct mutex* tm;
     struct memory_container_cmd *kernel_cmd = (struct memory_container_cmd*)kmalloc(sizeof(struct memory_container_cmd), GFP_KERNEL);
     copy_from_user(kernel_cmd, user_cmd, sizeof(*user_cmd));
